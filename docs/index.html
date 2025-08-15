@@ -9,9 +9,9 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#sobre" onclick="loadSection('sobre')">Sobre</a></li>
-            <li><a href="#projetos" onclick="loadSection('projetos')">Projetos</a></li>
-            <li><a href="#contato" onclick="loadSection('contato')">Contato</a></li>
+            <li id="menu-sobre" tabindex="0">Sobre</li>
+            <li id="menu-projetos" tabindex="0">Projetos</li>
+            <li id="menu-contato" tabindex="0">Contato</li>
         </ul>
     </nav>
     <div id="conteudo"></div>
@@ -24,7 +24,14 @@
                 location.hash = sec;
             });
     }
+    // Adiciona eventos aos itens de menu
+    function setupMenu() {
+        document.getElementById('menu-sobre').onclick = () => loadSection('sobre');
+        document.getElementById('menu-projetos').onclick = () => loadSection('projetos');
+        document.getElementById('menu-contato').onclick = () => loadSection('contato');
+    }
     window.addEventListener('DOMContentLoaded', () => {
+        setupMenu();
         let sec = location.hash.replace('#','') || 'sobre';
         loadSection(sec);
     });
