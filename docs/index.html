@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#sobre" onclick="loadSection('sobre')">Sobre</a></li>
+            <li><a href="#projetos" onclick="loadSection('projetos')">Projetos</a></li>
+            <li><a href="#contato" onclick="loadSection('contato')">Contato</a></li>
+        </ul>
+    </nav>
+    <div id="conteudo"></div>
+    <script>
+    function loadSection(sec) {
+        fetch('pages/' + sec + '.html')
+            .then(resp => resp.text())
+            .then(html => {
+                document.getElementById('conteudo').innerHTML = html;
+                location.hash = sec;
+            });
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+        let sec = location.hash.replace('#','') || 'sobre';
+        loadSection(sec);
+    });
+    window.addEventListener('hashchange', () => {
+        let sec = location.hash.replace('#','') || 'sobre';
+        loadSection(sec);
+    });
+    </script>
+</body>
+</html>
