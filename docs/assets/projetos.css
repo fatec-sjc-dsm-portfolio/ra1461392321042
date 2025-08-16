@@ -1,0 +1,50 @@
+#projetos .projeto-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+#projetos .projeto-img {
+    flex: 0 0 180px;
+    max-width: 180px;
+}
+#projetos .projeto-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    background: #222;
+}
+#projetos .projeto-info {
+    flex: 1 1 300px;
+    min-width: 220px;
+}
+#projetos {
+    max-width: 700px;
+    margin: 120px auto 0 auto;
+    padding: 40px 32px;
+    background: rgba(20, 22, 40, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+#projetos h1 {
+    font-size: 2.2rem;
+    color: #00bcd4;
+    margin-bottom: 10px;
+}
+#projetos ul {
+    list-style: disc inside;
+    margin-left: 0;
+    padding-left: 0;
+}
+#projetos li {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    padding-left: 8px;
+}

@@ -7,69 +7,113 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <nav aria-label="Menu principal">
-        <ul id="menu-list">
-        </ul>
-    </nav>
-    <div id="conteudo"></div>
+    <header>
+        <nav aria-label="Menu principal">
+            <ul id="menu-list">
+            </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo">
+        <section class="hero">
+            <div class="hero-text">
+                <p>Olá, eu sou</p>
+                <h1>Maria Gabriela Oliveira</h1>
+                <h2>Estudante de Software Development</h2>
+                <p>Bem-vindo(a) ao meu portfolio!</p>
+                <a href="#contato" class="btn">Contatar</a>
+            </div>
+        </section>
+    </main>
+
     <script>
-    function loadSection(sec) {
-        if (!sec || sec === 'home') {
-            document.getElementById('conteudo').innerHTML = `<section><h1>Bem-vindo ao meu portfólio!</h1><p>Esta é a página inicial.</p></section>`;
-            highlightMenu('home');
-        } else {
-            fetch('pages/' + sec + '.html')
+        function renderMenu(current) {
+            const menuList = document.getElementById('menu-list');
+            let items = '';
+            if (current !== 'home') {
+                items += '<li><a href="#home">Home</a></li>';
+            }
+            items += '<li><a href="#sobre">Sobre</a></li>';
+            items += '<li><a href="#projetos">Projetos</a></li>';
+            items += '<li><a href="#contato">Contato</a></li>';
+            menuList.innerHTML = items;
+        }
+
+        function loadSection(sec) {
+            // Remove CSSs específicos se existirem
+            const contatoCss = document.getElementById('contato-css');
+            if (contatoCss) contatoCss.remove();
+            const projetosCss = document.getElementById('projetos-css');
+            if (projetosCss) projetosCss.remove();
+            renderMenu(sec);
+            if (!sec || sec === 'home') {
+                document.getElementById('conteudo').innerHTML = `
+                    <section class="hero">
+                        <div class="hero-text">
+                            <p>Olá, eu sou</p>
+                            <h1>Maria Gabriela Oliveira</h1>
+                            <h2>Estudante de Software Development</h2>
+                        </br>
+                            <a href="#contato" class="btn">Contatar</a>
+                        </div>
+                    </section>
+                `;
+                highlightMenu('home');
+            } else {
+                fetch('pages/' + sec + '.html')
                 .then(resp => resp.text())
                 .then(html => {
                     document.getElementById('conteudo').innerHTML = html;
+                    if (sec === 'contato') {
+                        const link = document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.href = 'assets/contato.css';
+                        link.id = 'contato-css';
+                        document.head.appendChild(link);
+                    }
+                    if (sec === 'projetos') {
+                        const link = document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.href = 'assets/projetos.css';
+                        link.id = 'projetos-css';
+                        document.head.appendChild(link);
+                    }
+                    if (sec === 'sobre') {
+                        const link = document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.href = 'assets/sobre.css';
+                        link.id = 'sobre-css';
+                        document.head.appendChild(link);
+                    }
                     highlightMenu(sec);
                 });
-        }
-    }
-
-    function renderMenu(current) {
-        const menuList = document.getElementById('menu-list');
-        let items = '';
-        if (current !== 'home') {
-            items += `<li><a id="menu-home" href="#home" tabindex="0">Home</a></li>`;
-        }
-        items += `<li><a id="menu-sobre" href="#sobre" tabindex="0">Sobre</a></li>`;
-        items += `<li><a id="menu-projetos" href="#projetos" tabindex="0">Projetos</a></li>`;
-        items += `<li><a id="menu-contato" href="#contato" tabindex="0">Contato</a></li>`;
-        menuList.innerHTML = items;
-    }
-
-    function highlightMenu(sec) {
-        ['home','sobre','projetos','contato'].forEach(id => {
-            const el = document.getElementById('menu-' + id);
-            if (el) {
-                if (id === sec) {
-                    el.classList.add('active');
-                } else {
-                    el.classList.remove('active');
-                }
             }
+        }
+
+        function highlightMenu(sec) {
+            ['home','sobre','projetos','contato'].forEach(id => {
+                const el = document.querySelector(`#menu-list a[href="#${id}"]`);
+                if (el) {
+                    if (id === sec) el.classList.add('active');
+                    else el.classList.remove('active');
+                }
+            });
+        }
+
+        function getCurrentSection() {
+            let sec = location.hash.replace('#','');
+            return (!sec || sec === 'home') ? 'home' : sec;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let sec = getCurrentSection();
+            loadSection(sec);
         });
-    }
 
-    function getCurrentSection() {
-        let sec = location.hash.replace('#','');
-        if (!sec || sec === 'home') return 'home';
-        return sec;
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        let sec = getCurrentSection();
-        renderMenu(sec);
-        highlightMenu(sec);
-        loadSection(sec);
-    });
-    window.addEventListener('hashchange', () => {
-        let sec = getCurrentSection();
-        renderMenu(sec);
-        highlightMenu(sec);
-        loadSection(sec);
-    });
+        window.addEventListener('hashchange', () => {
+            let sec = getCurrentSection();
+            loadSection(sec);
+        });
     </script>
 </body>
 </html>
