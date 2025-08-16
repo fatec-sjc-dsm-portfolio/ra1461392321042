@@ -7,36 +7,68 @@
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li id="menu-sobre" tabindex="0">Sobre</li>
-            <li id="menu-projetos" tabindex="0">Projetos</li>
-            <li id="menu-contato" tabindex="0">Contato</li>
+    <nav aria-label="Menu principal">
+        <ul id="menu-list">
+            <!-- O menu será preenchido via JS -->
         </ul>
     </nav>
     <div id="conteudo"></div>
     <script>
     function loadSection(sec) {
-        fetch('pages/' + sec + '.html')
-            .then(resp => resp.text())
-            .then(html => {
-                document.getElementById('conteudo').innerHTML = html;
-                location.hash = sec;
-            });
+        if (!sec || sec === 'home') {
+            document.getElementById('conteudo').innerHTML = `<section><h1>Bem-vindo ao meu portfólio!</h1><p>Esta é a página inicial.</p></section>`;
+            highlightMenu('home');
+        } else {
+            fetch('pages/' + sec + '.html')
+                .then(resp => resp.text())
+                .then(html => {
+                    document.getElementById('conteudo').innerHTML = html;
+                    highlightMenu(sec);
+                });
+        }
     }
-    // Adiciona eventos aos itens de menu
-    function setupMenu() {
-        document.getElementById('menu-sobre').onclick = () => loadSection('sobre');
-        document.getElementById('menu-projetos').onclick = () => loadSection('projetos');
-        document.getElementById('menu-contato').onclick = () => loadSection('contato');
+
+    function renderMenu(current) {
+        const menuList = document.getElementById('menu-list');
+        let items = '';
+        if (current !== 'home') {
+            items += `<li><a id="menu-home" href="#home" tabindex="0">Home</a></li>`;
+        }
+        items += `<li><a id="menu-sobre" href="#sobre" tabindex="0">Sobre</a></li>`;
+        items += `<li><a id="menu-projetos" href="#projetos" tabindex="0">Projetos</a></li>`;
+        items += `<li><a id="menu-contato" href="#contato" tabindex="0">Contato</a></li>`;
+        menuList.innerHTML = items;
     }
+
+    function highlightMenu(sec) {
+        ['home','sobre','projetos','contato'].forEach(id => {
+            const el = document.getElementById('menu-' + id);
+            if (el) {
+                if (id === sec) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    function getCurrentSection() {
+        let sec = location.hash.replace('#','');
+        if (!sec || sec === 'home') return 'home';
+        return sec;
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
-        setupMenu();
-        let sec = location.hash.replace('#','') || 'sobre';
+        let sec = getCurrentSection();
+        renderMenu(sec);
+        highlightMenu(sec);
         loadSection(sec);
     });
     window.addEventListener('hashchange', () => {
-        let sec = location.hash.replace('#','') || 'sobre';
+        let sec = getCurrentSection();
+        renderMenu(sec);
+        highlightMenu(sec);
         loadSection(sec);
     });
     </script>
