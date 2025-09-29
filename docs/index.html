@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Portfólio</title>
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/home.css">
+    <link rel="stylesheet" href="assets/sobre.css">
     <link rel="stylesheet" href="assets/contato.css">
     <link rel="stylesheet" href="assets/projetos.css">
-    <link rel="stylesheet" href="assets/sobre.css">
 </head>
+
 <body>
     <header>
         <nav aria-label="Menu principal">
@@ -33,9 +36,7 @@
         function renderMenu(current) {
             const menuList = document.getElementById('menu-list');
             let items = '';
-            if (current !== 'home') {
-                items += '<li><a href="#home">Home</a></li>';
-            }
+            items += '<li><a href="#home">Home</a></li>';
             items += '<li><a href="#sobre">Sobre</a></li>';
             items += '<li><a href="#projetos">Projetos</a></li>';
             items += '<li><a href="#contato">Contato</a></li>';
@@ -48,6 +49,8 @@
             if (contatoCss) contatoCss.remove();
             const projetosCss = document.getElementById('projetos-css');
             if (projetosCss) projetosCss.remove();
+            const sobreCss = document.getElementById('sobre-css');
+            if (sobreCss) sobreCss.remove();
             renderMenu(sec);
             if (!sec || sec === 'home') {
                 document.getElementById('conteudo').innerHTML = `
@@ -56,45 +59,58 @@
                             <p>Olá, eu sou</p>
                             <h1>Maria Gabriela Oliveira</h1>
                             <h2>Estudante de Software Development</h2>
-                        </br>
+                            <p>Bem-vindo(a) ao meu portfolio!</p>
+                            <br>
+                            <br>
                             <a href="#contato" class="btn">Contatar</a>
                         </div>
+<div class="home-image">
+            <img src="assets/images/foto_pessoal.webp" alt="Foto de Maria Gabriela Oliveira" class="profile-photo">
+        </div>
                     </section>
                 `;
                 highlightMenu('home');
+
             } else {
                 fetch('pages/' + sec + '.html')
-                .then(resp => resp.text())
-                .then(html => {
-                    document.getElementById('conteudo').innerHTML = html;
-                    if (sec === 'contato') {
-                        const link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.href = 'assets/contato.css';
-                        link.id = 'contato-css';
-                        document.head.appendChild(link);
-                    }
-                    if (sec === 'projetos') {
-                        const link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.href = 'assets/projetos.css';
-                        link.id = 'projetos-css';
-                        document.head.appendChild(link);
-                    }
-                    if (sec === 'sobre') {
-                        const link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.href = 'assets/sobre.css';
-                        link.id = 'sobre-css';
-                        document.head.appendChild(link);
-                    }
-                    highlightMenu(sec);
-                });
+                    .then(resp => resp.text())
+                    .then(html => {
+                        document.getElementById('conteudo').innerHTML = html;
+                        if (sec === 'home') {
+                            const link = document.createElement('link');
+                            link.rel = 'stylesheet';
+                            link.href = 'assets/home.css';
+                            link.id = 'home-css';
+                            document.head.appendChild(link);
+                        }
+                        if (sec === 'sobre') {
+                            const link = document.createElement('link');
+                            link.rel = 'stylesheet';
+                            link.href = 'assets/sobre.css';
+                            link.id = 'sobre-css';
+                            document.head.appendChild(link);
+                        }
+                        if (sec === 'contato') {
+                            const link = document.createElement('link');
+                            link.rel = 'stylesheet';
+                            link.href = 'assets/contato.css';
+                            link.id = 'contato-css';
+                            document.head.appendChild(link);
+                        }
+                        if (sec === 'projetos') {
+                            const link = document.createElement('link');
+                            link.rel = 'stylesheet';
+                            link.href = 'assets/projetos.css';
+                            link.id = 'projetos-css';
+                            document.head.appendChild(link);
+                        }
+                        highlightMenu(sec);
+                    });
             }
         }
 
         function highlightMenu(sec) {
-            ['home','sobre','projetos','contato'].forEach(id => {
+            ['home', 'sobre', 'projetos', 'contato'].forEach(id => {
                 const el = document.querySelector(`#menu-list a[href="#${id}"]`);
                 if (el) {
                     if (id === sec) el.classList.add('active');
@@ -104,7 +120,7 @@
         }
 
         function getCurrentSection() {
-            let sec = location.hash.replace('#','');
+            let sec = location.hash.replace('#', '');
             return (!sec || sec === 'home') ? 'home' : sec;
         }
 
@@ -119,4 +135,5 @@
         });
     </script>
 </body>
+
 </html>
