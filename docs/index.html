@@ -55,18 +55,18 @@
             if (!sec || sec === 'home') {
                 document.getElementById('conteudo').innerHTML = `
                     <section class="hero">
+                        <div class="home-image">
+                            <img src="assets/images/foto_pessoal.webp" alt="Foto de Maria Gabriela Oliveira" class="profile-photo">
+                        </div>
                         <div class="hero-text">
                             <p>Olá, eu sou</p>
-                            <h1>Maria Gabriela Oliveira</h1>
+                            <h2>Maria Gabriela Oliveira</h2>
                             <h2>Estudante de Software Development</h2>
                             <p>Bem-vindo(a) ao meu portfolio!</p>
                             <br>
                             <br>
                             <a href="#contato" class="btn">Contatar</a>
                         </div>
-<div class="home-image">
-            <img src="assets/images/foto_pessoal.webp" alt="Foto de Maria Gabriela Oliveira" class="profile-photo">
-        </div>
                     </section>
                 `;
                 highlightMenu('home');
@@ -103,7 +103,6 @@
                             link.href = 'assets/projetos.css';
                             link.id = 'projetos-css';
                             document.head.appendChild(link);
-                            // Inicializar modais dos projetos após carregamento
                             setTimeout(initializeModals, 100);
                         }
                         highlightMenu(sec);

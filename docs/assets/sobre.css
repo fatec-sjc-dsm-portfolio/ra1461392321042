@@ -6,7 +6,7 @@
 }
 
 .sobre-section {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .sobre-intro {
@@ -85,10 +85,8 @@
     font-size: 1.3rem;
     color: #ccc;
     margin-bottom: 10px;
-    margin-left: 120px;
     padding-bottom: 10px;
-    padding-left: 30px;
-    margin-top: 10px;
+    margin-top: 1px;
     }
 
 
@@ -103,9 +101,9 @@
 .info-card {
     background: rgba(20, 22, 40, 0.6);
     border-radius: 8px;
-    padding: 20px;
+    padding: 18px;
     margin: 15px auto;
-    border-left: 4px solid #00bcd4;
+    border-left: 4px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     width: 80%;
 }
@@ -119,6 +117,7 @@
     color: #00bcd4;
     font-size: 1.3rem;
     margin-bottom: 15px;
+    margin-left: 1px;
 }
 
 .info-card p {
@@ -322,6 +321,8 @@
     .section-content {
         padding: 25px;
     }
+
+    .section-title
     
     .section-title {
         font-size: 1.1rem;
