@@ -73,6 +73,8 @@ p {
     width: 24px;
     height: 24px;
     transition: all 0.3s ease;
+    display: block;
+    margin: auto;
 }
 
 .email .contato-icon {
