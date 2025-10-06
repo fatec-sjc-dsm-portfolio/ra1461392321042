@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #0b0c1a; 
+    color: #fff;
+}
+
+/* Header */
+header {
+    width: 100%;
+    padding: 20px 40px;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    flex-shrink: 0;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+    background: rgba(0, 188, 212, 0.1);
+    border-color: rgba(0, 188, 212, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.2);
+}
+
+.logo-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00bcd4;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover .logo-avatar {
+    border-color: #26c6da;
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00bcd4;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover .logo-text {
+    color: #26c6da;
+}
+
+/* Menu */
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#menu-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+#menu-list a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+#menu-list a.active,
+#menu-list a:hover {
+    color: #00bcd4; 
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0 40px;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.home-image {
+    flex: 0 0 300px;
+    display: flex;
+    justify-content: center;
+    order: 1;
+}
+
+.profile-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #00bcd4;
+    box-shadow: 0 8px 32px rgba(0, 188, 212, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 188, 212, 0.4);
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+    order: 2;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin: 0 0 5px 0;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin: 0 0 10px 0;
+}
+
+.hero-text h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #00bcd4;
+    color: #0b0c1a;
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #00bcd4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    
+    .logo-link {
+        gap: 8px;
+        padding: 6px;
+    }
+    
+    .logo-avatar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .logo-text {
+        font-size: 1rem;
+    }
+    
+    #menu-list {
+        gap: 20px;
+    }
+    
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 0 20px;
+    }
+    
+    .home-image {
+        flex: none;
+        order: 1;
+    }
+    
+    .hero-text {
+        order: 2;
+        flex: none;
+    }
+    
+    .profile-photo {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-photo {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-text p {
+        font-size: 1.1rem;
+    }
+    
+    #menu-list {
+        gap: 15px;
+    }
+    
+    #menu-list a {
+        font-size: 0.9rem;
+    }
+}
