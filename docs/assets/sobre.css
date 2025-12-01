@@ -250,8 +250,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-left: 150px;
-    margin-right: 150px;
 }
 
 .skill-category {
