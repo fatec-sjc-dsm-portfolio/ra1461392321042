@@ -8,13 +8,14 @@
 body {
     background-color: #0b0c1a; 
     color: #fff;
+    padding-top: 80px;
 }
 
 /* Header */
 header {
     width: 100%;
     padding: 20px 40px;
-    background-color: transparent;
+    background-color: #0b0c1a;
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +23,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.1);
 }
 
 .header-logo {

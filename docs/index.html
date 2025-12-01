@@ -27,15 +27,6 @@
     </header>
 
     <main id="conteudo">
-        <section class="hero">
-            <div class="hero-text">
-                <p>Olá, eu sou a</p>
-                <h1>Maria Gabriela Oliveira</h1>
-                <h2>Estudante de Software Development</h2>
-                <p>Bem-vindo(a) ao meu portfolio!</p>
-                <a href="#contato" class="btn">Contatar</a>
-            </div>
-        </section>
     </main>
 
     <script>
@@ -48,8 +39,7 @@
             menuList.innerHTML = items;
         }
 
-        function loadSection(sec) {
-            // Remove CSSs específicos se existirem
+        function loadSection(sec) {            
             const contatoCss = document.getElementById('contato-css');
             if (contatoCss) contatoCss.remove();
             const projetosCss = document.getElementById('projetos-css');
@@ -58,36 +48,17 @@
             if (sobreCss) sobreCss.remove();
             renderMenu(sec);
             if (!sec || sec === 'home') {
-                document.getElementById('conteudo').innerHTML = `
-                    <section class="hero">
-                        <div class="home-image">
-                            <img src="assets/images/foto_pessoal.webp" alt="Foto de Maria Gabriela Oliveira" class="profile-photo">
-                        </div>
-                        <div class="hero-text">
-                            <p>Olá, eu sou a</p>
-                            <h2>Maria Gabriela Oliveira</h2>
-                            <h2>Estudante de Software Development</h2>
-                            <p>Bem-vindo(a) ao meu portfolio!</p>
-                            <br>
-                            <br>
-                            <a href="#contato" class="btn">Contatar</a>
-                        </div>
-                    </section>
-                `;
-                highlightMenu('home');
-
+                fetch('pages/home.html')
+                    .then(resp => resp.text())
+                    .then(html => {
+                        document.getElementById('conteudo').innerHTML = html;
+                        highlightMenu('home');
+                    });
             } else {
                 fetch('pages/' + sec + '.html')
                     .then(resp => resp.text())
                     .then(html => {
                         document.getElementById('conteudo').innerHTML = html;
-                        if (sec === 'home') {
-                            const link = document.createElement('link');
-                            link.rel = 'stylesheet';
-                            link.href = 'assets/home.css';
-                            link.id = 'home-css';
-                            document.head.appendChild(link);
-                        }
                         if (sec === 'sobre') {
                             const link = document.createElement('link');
                             link.rel = 'stylesheet';
@@ -115,13 +86,12 @@
             }
         }
 
-        function initializeModals() {
-            // Adicionar event listeners para os cards dos projetos
+        function initializeModals() {            
             const projectCards = document.querySelectorAll('.project-card[data-modal]');
             const modals = document.querySelectorAll('.modal');
             const closeButtons = document.querySelectorAll('.close');
 
-            // Abrir modal ao clicar no card
+            // Abre modal ao clicar em um card do meu projeto
             projectCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const modalId = this.getAttribute('data-modal');
@@ -133,7 +103,7 @@
                 });
             });
 
-            // Fechar modal ao clicar no X
+            // Fechar o modal
             closeButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     this.closest('.modal').style.display = 'none';
@@ -141,7 +111,7 @@
                 });
             });
 
-            // Fechar modal ao clicar fora do conteúdo
+            // Ou fechar modal clicando fora dele
             modals.forEach(modal => {
                 modal.addEventListener('click', function(e) {
                     if (e.target === this) {
